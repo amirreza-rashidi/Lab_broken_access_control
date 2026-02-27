@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#1f1c2c,#928dab);
+    font-family: Arial, sans-serif;
+}
+
+#login_div{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+    width:300px;
+    text-align:center;
+}
+
+#login_div h2{
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+    transition:0.3s;
+}
+
+input:focus{
+    border-color:#6a5acd;
+    box-shadow:0 0 5px rgba(106,90,205,0.5);
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#6a5acd;
+    border:none;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#5848c2;
+}
+
+#result{
+    margin-top:20px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="login_div">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onClick="check_login()" >Login</button>
+</div>
+
+<h1 id="result"></h1>
+
+<script>
+function check_login(){
+let username=document.getElementById("username").value;
+let password=document.getElementById("password").value;
+ 
+let xml= new XMLHttpRequest();    
+xml.onload=function(){
+    if (xml.responseText==="200"){
+        document.getElementById("login_div").hidden=true;
+        document.getElementById("result").style.color='green';
+        document.getElementById("result").innerHTML="Logged in";
+    }
+    else{
+        document.getElementById("result").style.color='red';
+        document.getElementById("result").innerHTML="Wrong username or password";
+    }
+}
+xml.open("POST","server.php",true);
+xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+let data = "username=" + username + "&password=" + password+ "&isAdmin=" + true;
+xml.send(data);
+}
+
+    
+document.addEventListener("keydown",function(k){
+    if(k.key==="Enter"){check_login();}
+}) ;  
+</script>
+
+</body>
+</html>

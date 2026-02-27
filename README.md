@@ -42,7 +42,7 @@ The backend checks the `isAdmin` value from a **POST request** — a parameter t
 The vulnerable server logic trusts a POST parameter to decide if a user is an admin:
 
 ```php
-// ❌ VULNERABLE — Client controls their own privilege level
+//  VULNERABLE — Client controls their own privilege level
 $isAdmin = $_POST['isAdmin'];
 
 if ($isAdmin == "true") {
@@ -66,9 +66,8 @@ The server reads `isAdmin=true` and grants full admin access — **no valid pass
 ## 🖼 Screenshots
 
 <p align="center">
-  <img src="./1.png" width="45%" alt="Malicious Request – isAdmin=true" />
+  <img src="1.png" width="45%" alt="Malicious Request – isAdmin=true" />
   &nbsp;&nbsp;
-  <img src="./2.png" width="45%" alt="Unauthorized Admin Access Granted" />
 </p>
 
 ---
@@ -97,48 +96,9 @@ This is fundamentally wrong. The client is an attacker. The server must never as
 - Verified & signed tokens (JWT with secret key)
 
 ---
-
-## 🛡 Secure Fix
-
-```php
-// ✅ SECURE — Role fetched from the database, not from the user
-session_start();
-
-if (empty($_SESSION['user_id'])) {
-    http_response_code(401);
-    exit("Unauthorized: Please log in.");
-}
-
-$stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch();
-
-if ($user['role'] !== 'admin') {
-    http_response_code(403);
-    exit("Forbidden: Admins only.");
-}
-
-echo "Welcome, Admin!";
-```
-
 ---
 
-## 📚 References
-
-- 🔗 [OWASP A01:2021 – Broken Access Control](https://owasp.org/Top10/A01_2021-Broken_Access_Control/)
-- 🔗 [OWASP Access Control Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Access_Control_Cheat_Sheet.html)
-- 🔗 [PortSwigger – Access Control Labs](https://portswigger.net/web-security/access-control)
-
----
-
-## ⚠️ Disclaimer
-
-> This repository is for **educational and research purposes only**.  
-> Do not use these techniques on systems you do not own or have explicit written permission to test.  
-> Practice responsibly in legal environments such as [DVWA](https://github.com/digininja/DVWA), [HackTheBox](https://www.hackthebox.com/), or [TryHackMe](https://tryhackme.com/).
-
----
 
 <p align="center">
-  Made with 🖤 for the Security Community &nbsp;|&nbsp; <strong>Happy Hacking — Ethically!</strong>
+  Made with 🖤 for the Security Community 
 </p>
