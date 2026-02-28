@@ -70,7 +70,7 @@ The server reads `isAdmin=true` and grants full admin access — **no valid pass
   &nbsp;&nbsp;
 </p>
 <p align="center">
-  <img src="2.png" width="45%" alt="Malicious Request – isAdmin=true" />
+  <img src="2.png" width="65%" alt="Malicious Request – isAdmin=true" />
   &nbsp;&nbsp;
 </p>
 ---
