@@ -84,10 +84,12 @@ let password=document.getElementById("password").value;
 let xml= new XMLHttpRequest();    
 xml.onload=function(){
     if (xml.responseText==="200"){
-        document.getElementById("login_div").hidden=true;
-        document.getElementById("result").style.color='green';
-        document.getElementById("result").innerHTML="Logged in";
+        window.location.href="files/logged_in.html";
     }
+    else if(xml.responseText==="202"){
+        window.location.href="files/passed_access.html";
+    } 
+    
     else{
         document.getElementById("result").style.color='red';
         document.getElementById("result").innerHTML="Wrong username or password";
@@ -95,7 +97,7 @@ xml.onload=function(){
 }
 xml.open("POST","server.php",true);
 xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-let data = "username=" + username + "&password=" + password+ "&isAdmin=" + true;
+let data = "username=" + username + "&password=" + password;
 xml.send(data);
 }
 
