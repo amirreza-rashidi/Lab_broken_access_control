@@ -1,12 +1,16 @@
 <?php 
-$user_name = $_POST['username'];
-$password = $_POST['password'];
-$isAdmin = $_POST['isAdmin'] ?? null;
+$user_name = $_POST['username'] ?? null;
+$password  = $_POST['password'] ?? null;
+$isAdmin   = $_POST['isAdmin'] ?? null;
 
-if ($user_name=="admin" && $password=="admin"){echo "200";}
-
-else if ($isAdmin == "true"){echo "202";}
-else{
-    echo "201";}
-
+if ($user_name === "admin" && $password === "admin") {
+    echo "200";
+} 
+else if ($isAdmin === "true") {
+    header("Location: files/passed_access.html");
+    exit();
+} 
+else {
+    echo "201";
+}
 ?>
