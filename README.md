@@ -66,10 +66,13 @@ The server reads `isAdmin=true` and grants full admin access — **no valid pass
 ## 🖼 Screenshots
 
 <p align="center">
-  <img src="1.png" width="55%" alt="Malicious Request – isAdmin=true" />
+  <img src="1.png" width="45%" alt="Malicious Request – isAdmin=true" />
   &nbsp;&nbsp;
 </p>
-
+<p align="center">
+  <img src="2.png" width="45%" alt="Malicious Request – isAdmin=true" />
+  &nbsp;&nbsp;
+</p>
 ---
 
 ## 🔐 Root Cause
