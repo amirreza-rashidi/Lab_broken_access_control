@@ -97,7 +97,7 @@ This is fundamentally wrong. The client is an attacker. The server must never as
 
 ---
 ---
-
+<p>hint is here :  use f12 in firefox or any browser (maybe not chrome) --->  then networks --->  resend request and post method --->  use "username=1&password=1&isAdmin=true"  in the body of request</p>
 
 <p align="center">
   Made with 🖤 for the Security Community 
